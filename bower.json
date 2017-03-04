@@ -1,0 +1,34 @@
+{
+  "name": "mean-stack",
+  "version": "0.0.0",
+  "description": "A template solution for a Node/Angular SPA",
+  "main": "server.js",
+  "authors": [
+    "camjm"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "AngularJS",
+    "Node.js",
+    "SPA",
+    "Mongoose",
+    "Express",
+    "webapp"
+  ],
+  "homepage": "https://github.com/camjm/mean-stack",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "animate.css": "^3.5.2",
+    "angular": "^1.6.2",
+    "angular-route": "^1.6.2"
+  }
+}

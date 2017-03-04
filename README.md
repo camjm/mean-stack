@@ -11,5 +11,5 @@ Node.js with Express and MongoDB.
 Handled in `server.js`, `app/` directory, `config/` directory.
 
 ### Frontend
-AngularJS Single Page Application (with bower to manage the frontend dependencies).
+AngularJS Single Page Application (with bower to manage the frontend dependencies, and Bootstrap to make pretty).
 Handled in `public/` directory.

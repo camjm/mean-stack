@@ -1,0 +1,46 @@
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>MEAN SPA</title>
+    <!-- Css -->
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Js -->
+    <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/angular-route/angular-route.min.js"></script>
+    <!-- Angular App -->
+    <script src="js/controllers/MainCtrl.js"></script>
+    <script src="js/controllers/NerdCtrl.js"></script>
+    <script src="js/services/NerdService.js"></script>
+    <script src="js/appRoutes.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+
+  <body ng-app="meanApp" ng-controller="NerdController">
+    <div class="container">
+
+      <!-- Header -->
+      <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Mean Stack</a>
+        </div>
+
+        <!-- Navigation: handle routing -->
+        <ul class="nav navbar-nav">
+          <li><a href="/nerds">Nerds</a></li>
+        </ul>
+      </nav>
+
+
+
+      <!-- Angular Dynamic Content -->
+      <div ng-view></div>
+
+    </div>
+  </body>
+
+<html>
