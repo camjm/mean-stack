@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-// define the model
+// define the model: MongoDB will automatically generate an _id for each
 module.exports = mongoose.model('Nerd', {
   name: { type: String, default: '' }
 });
