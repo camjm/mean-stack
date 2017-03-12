@@ -1,0 +1,33 @@
+doctype html
+html(language="en")
+  head
+    meta(charset="UTF-8")
+    base(href="/")
+    title MEAN SPA
+    // Css
+    link(rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="css/style.css")
+    // Js
+    script(src="libs/angular/angular.min.js")
+    script(src="libs/angular-route/angular-route.min.js")
+    // Angular App
+    script(src="js/controllers/MainCtrl.js")
+    script(src="js/controllers/NerdCtrl.js")
+    script(src="js/services/NerdService.js")
+    script(src="js/appRoutes.js")
+    script(src="js/app.js")
+    
+  body(ng-app="meanApp")
+    div.container
+    
+      // Header
+      nav.navbar.navbar-inverse
+        div.navbar-header
+          a(href="/").navbar-brand Mean Stack
+        // Navigation: handle routing
+        ul.nav.navbar-nav
+          li
+            a(href="/nerds") Nerds
+            
+      // Angular Dynamic Content
+      div(ng-view)

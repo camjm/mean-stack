@@ -68,13 +68,16 @@ module.exports = function(app) {
 
   //TODO:
 
+  // FRONTEND ROUTES
 
-  // FRONTEND routes
+  // Angular partial views
+  app.get('/partials/*', function(req, res, next) {
+    res.render('.' + req.path);
+  });
 
   // handle Angular SPA request (for all other routes)
   app.get('*', function(req, res) {
-    res.sendfile('./public/views/index.html');
+    res.render('index');
   });
-
 
 };
