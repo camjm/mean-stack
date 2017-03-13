@@ -1,5 +1,6 @@
 doctype html
 html(language="en")
+
   head
     title MEAN SPA
     // Meta
@@ -28,8 +29,7 @@ html(language="en")
           a(href="/").navbar-brand Mean Stack
         // Navigation: handle routing
         ul.nav.navbar-nav
-          li
-            a(href="/nerds") Nerds
+          li: a(href="/nerds") Nerds
             
       // Angular Dynamic Content
       div(ng-view)
