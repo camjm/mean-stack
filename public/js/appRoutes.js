@@ -2,13 +2,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 
   $routeProvider
 
-    // home page
     .when('/', {
       templateUrl: 'partials/home',
       controller: 'MainController'
     })
 
-    // nerds page that will use the NerdController
     .when('/nerds', {
       templateUrl: 'partials/nerd',
       controller: 'NerdController'
