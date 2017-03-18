@@ -18,7 +18,7 @@ var db = require('./config/db');
 var port = process.env.PORT || 8080;
 
 // TODO: connect to mongoDB database
-// mongoose.connect(db.url);
+mongoose.connect(db.url);
 
 // parse application/json
 app.use(bodyParser.json());
@@ -41,7 +41,10 @@ app.use(morgan('dev'));
 // ROUTES
 
 // configure routes
-require('./app/routes')(app);
+var apiRouter = express.Router();
+require('./app/backendRoutes')(apiRouter);
+require('./app/frontEndRoutes')(app);
+app.use('/api', apiRouter);
 
 // VIEWS
 app.set('views', path.join(__dirname, '/views'));
