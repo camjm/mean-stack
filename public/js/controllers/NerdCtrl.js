@@ -6,37 +6,51 @@ angular.module('NerdCtrl', []).controller('NerdController', function($scope, Ner
 
     // when landing on the page get and show all the nerds
     Nerd.get()
-      .success(function(data) {
-        $scope.nerds = data;
-        console.log(data);
+      .then(function(response) {
+        // on success
+        $scope.nerds = response.data;
+        console.log(response);
+      }, function(response) {
+        // handle errors produced by $http
+        console.log('Error: ' + response)
       })
-      .error(function(data) {
-        console.log('Error: ' + data)
+      .catch(function(response) {
+        // handle errors occuring in the functions passed into .then()
+        console.log('Error: ' + response)
       });
 
     // submit the form to the API, then repopulate the list
     $scope.createNerd = function() {
       Nerd.create($scope.formData)
-        .success(function(data) {
-          // clear the form
-          $scope.formData = {};
-          $scope.nerds = data;
-          console.log(data);
+        .then(function(response) {
+          // on success
+          $scope.formData = {}; // clear the form
+          $scope.nerds = response.data;
+          console.log(response);
+        }, function(response) {
+          // handle errors produced by $http
+          console.log('Error: ' + response);
         })
-        .error(function(data) {
-          console.log('Error: ' + data);
+        .catch(function(response) {
+          // handle errors occuring in the functions passed into .then()
+          console.log('Error: ' + response);
         });
     };
 
     // delete the nerd, then repopulate the list
     $scope.deleteNerd = function(id) {
       Nerd.delete(id)
-        .success(function(data){
-          $scope.nerds = data;
-          console.log(data);
+        .then(function(response){
+          // on success
+          $scope.nerds = response.data;
+          console.log(response);
+        }, function(response) {
+          // handle errors produced by $http
+          console.log('Error: ' + response)
         })
-        .error(function(data){
-          console.log('Error: ' + data)
+        .catch(function(response){
+          // handle errors occuring in the functions passed into .then()
+          console.log('Error: ' + response)
         })
     };
 

@@ -8,12 +8,14 @@ div.jumbotron.text-center
 div#nerd-list.row
   div.col-sm-4.col-sm-offset-4
     div.checkbox(ng-repeat="nerd in nerds")
-      label: input(type="checkbox" ng-click="deleteNerd(nerd._id)") {{ nerd.text }}
+      label
+        input(type="checkbox" ng-click="deleteNerd(nerd._id)") 
+        {{ nerd.name }}
 
 // Form to create nerds
 div#nerd-form.row
   div.col-sm-8.col-sm-offset-2.text-center
     form
       div.form-group
-        input(type="text" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text").form-control.input-lg.text-center
+        input(type="text" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.name").form-control.input-lg.text-center
       button(type="submit" ng-click="createNerd()").btn.btn-primary.btn-lg Add
