@@ -17,8 +17,15 @@ var db = require('./config/db');
 // set port
 var port = process.env.PORT || 8080;
 
-// TODO: connect to mongoDB database
+// connect to mongoDB database
 mongoose.connect(db.url);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('connected to db');
+});
+
+// MIDDLEWARE: run in order
 
 // parse application/json
 app.use(bodyParser.json());

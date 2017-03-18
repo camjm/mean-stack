@@ -5,6 +5,13 @@ var Nerd = require('./models/nerd');
 
 module.exports = function(app) {
 
+  // example of arbitrary middleware
+  app.use(function(req, res, next) {
+    // middleware can be used for: user authentication, api analytics, input validation, throwing errors
+    console.log('call to API');
+    next(); // don't stop here, continue down pipeline
+  });
+
   // Get All
   app.get('/nerds', function(req, res) {
     // use mongoose to get all nerds from db
@@ -27,6 +34,7 @@ module.exports = function(app) {
       if (err) {
         res.send(err);
       }
+      nerd.speak();
       // use mongoose to get all nerds from db
       Nerd.find(function(err, nerds) {
         if (err) {
