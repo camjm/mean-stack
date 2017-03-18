@@ -47,6 +47,41 @@ module.exports = function(app) {
     });
   });
 
+  // Get single
+  app.get('/nerds/:nerd_id', function(req, res) {
+    // find the nerd specified in the request params
+    Nerd.findById(req.params.nerd_id, function(err, nerd) {
+      if (err) {
+        res.send(err);
+      }
+      nerd.speak();
+      // return single nerd in json format
+      res.json(nerd);
+    });
+  });
+
+  // Update (and send back all)
+  app.put('/nerds/:nerd_id', function(req, res) {
+    // find the nerd specified in the request params
+    Nerd.findOneAndUpdate({ // use .findById()... .save()... instead?
+      _id: req.params.nerd_id
+    }, req.body, function(err, nerd) {
+      if (err) {
+        res.send(err);
+      }
+      nerd.speak();
+      // use mongoose to get all nerds from db
+      Nerd.find(function(err, nerds) {
+        if (err) {
+          // nothing after res.send will execute
+          res.send(err);
+        }
+        // return all nerds in JSON format
+        res.json(nerds);
+      });
+    });
+  });
+
   // Delete (and send back all remaining)
   app.delete('/nerds/:nerd_id', function(req, res) {
     // delete the nerd specified in the request params

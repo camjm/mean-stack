@@ -16,6 +16,8 @@
 | GET          | /api/nerds         | Get all of the nerds |
 | POST         | /api/nerds         | Create a single nerd |
 | DELETE       | /api/nerds:nerd_id | Delete a single nerd |
+| GET          | /api/nerds:nerd_id | Get a single nerd    |
+| PUT          | /api/nerds:nerd_id | Update a nerd        |
 
 ### Frontend
 * AngularJS Single Page Application (with bower to manage the frontend dependencies, and Bootstrap to make pretty).
