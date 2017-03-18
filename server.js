@@ -49,8 +49,8 @@ app.use(morgan('dev'));
 
 // configure routes
 var apiRouter = express.Router();
-require('./app/backendRoutes')(apiRouter);
-require('./app/frontEndRoutes')(app);
+require('./app/routes/backend')(apiRouter);
+require('./app/routes/frontend')(app);
 app.use('/api', apiRouter);
 
 // VIEWS
