@@ -1,11 +1,11 @@
 // The backend API CRUD routes
 
 // database model
-var Nerd = require('./models/nerd');
+var Nerd = require('../models/nerd');
 
 module.exports = function(app) {
 
-  // example of arbitrary middleware
+  // arbitrary example of middleware
   app.use(function(req, res, next) {
     // middleware can be used for: user authentication, api analytics, input validation, throwing errors
     console.log('call to API');

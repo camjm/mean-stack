@@ -9,7 +9,7 @@ var nerdSchema = mongoose.Schema({
 
 // add methods to the schema before compiling it
 nerdSchema.methods.speak = function() {
-  console.log(`Hello, I am {this.name}`);
+  console.log(`Hello, I am ${this.name}`);
 };
 
 // compile the model and expose
