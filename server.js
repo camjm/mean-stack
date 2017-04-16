@@ -12,7 +12,7 @@ var app = express();
 // CONFIGURATION
 
 // configuration file
-var db = require('./config/db');
+var db = require('./config/database');
 
 // set port
 var port = process.env.PORT || 8080;
