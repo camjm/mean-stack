@@ -2,30 +2,52 @@
 var path = require('path')
 var morgan = require('morgan');
 var express = require('express');
+var session = require('express-session');
+var passport = require('passport');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
+var flash = require('connect-flash');
 
-// APP
 var app = express();
 
-// CONFIGURATION
+// DATABASE CONFIGURATION
 
 // configuration file
-var db = require('./config/database');
-
-// set port
-var port = process.env.PORT || 8080;
+var dbConfig = require('./config/database');
 
 // connect to mongoDB database
-mongoose.connect(db.url);
+mongoose.connect(dbConfig.url);
+
+// attach event listeners
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('connected to db');
 });
 
-// MIDDLEWARE: run in order
+// AUTHENTICATION
+
+require('./config/passport')(passport);
+
+// session secret
+app.use(session({ secret: 'thisisreallythesecret' }));
+
+// persistent login sessions
+app.use(passport.initialize());
+app.use(passport.session());
+
+// flash messages stored in session
+app.use(flash());
+
+// MIDDLEWARE (run in order)
+
+// read cookies for authentication
+app.use(cookieParser());
+
+// parse html forms
+app.use(bodyParser());
 
 // parse application/json
 app.use(bodyParser.json());
@@ -49,9 +71,9 @@ app.use(morgan('dev'));
 
 // configure routes
 var apiRouter = express.Router();
-require('./app/routes/backend')(apiRouter);
-require('./app/routes/frontend')(app);
-app.use('/api', apiRouter);
+require('./app/routes/backend')(apiRouter, passport);
+require('./app/routes/frontend')(app, passport);
+app.use('/api', apiRouter); // mount api
 
 // VIEWS
 app.set('views', path.join(__dirname, '/views'));
@@ -59,9 +81,13 @@ app.set('view engine', 'jade');
 
 // START SERVER
 
-// startup app at http://localhost:8080
+// set port
+var port = process.env.PORT || 8080;
+
+// startup localhost app
 app.listen(port);
 console.log('listening on port ' + port);
 
-// expose app
+// EXPOSE
+
 exports = module.exports = app;
