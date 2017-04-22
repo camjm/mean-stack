@@ -1,3 +1,7 @@
+/*
+Application Bootstrap
+*/
+
 // MODULES
 var path = require('path')
 var morgan = require('morgan');
