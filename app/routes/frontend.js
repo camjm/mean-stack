@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function(app, passport) {
 
   // TODO: authentication routes
 
@@ -33,19 +33,21 @@ module.exports = function(app) {
     res.render('.' + req.path);
   });
 
-  // handle Angular SPA request (for all other routes)
-  app.get('/', function(req, res) {
-    res.render('index');
-  });
-
   // process the login form
   app.post('/login', function(req, res) {
     //TODO: passport stuff here
   });
 
-  // process the signup form
-  app.post('/signup', function(req, res) {
-    //TODO: passport stuff here
+  // passport strategy authenticates request, and handles success/failure
+  app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/profile',
+    failureRedirect: '/signup', // if not specifed, responds with HTTP 401
+    failureFlash: true // allow flash messages
+  }));
+
+  // handle Angular SPA request (for all other routes)
+  app.get('*', function(req, res) {
+    res.render('index');
   });
 
   // route middleware: make sure user is logged in
