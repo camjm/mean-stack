@@ -1,0 +1,29 @@
+div.col-sm-6.col-sm-offset-3
+
+  h1
+    span.fa.fa-sign-in 
+    |  Signup
+
+  // show any messages that come back with the authentication
+  if message.length > 0
+    div.alert.alert-danger #{message}
+
+  // Signup form (TODO: submit in angular controller - see NerdController)
+  form(action="/signup" method="post")
+    div.form-group
+      label Email
+      input(type="text" name="email").form-control
+    div.form-group
+      label Password
+      input(type="password" name="password").form-control
+    button(type="submit").btn.btn-warning.btn-lg Signup
+    
+  hr
+  
+  p
+    | Already have an account? 
+    a(href="/login") Login
+  p
+    | Or go 
+    a(href="/") home
+    |.

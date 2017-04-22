@@ -10,6 +10,16 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     .when('/nerds', {
       templateUrl: 'partials/nerd',
       controller: 'NerdController'
+    })
+
+    .when('/login', {
+      templateUrl: 'partials/login',
+      controller: 'LoginController'
+    })
+
+    .when('/signup', {
+      templateUrl: 'partials/signup',
+      controller: 'SignupController'
     });
 
   $locationProvider.html5Mode(true);

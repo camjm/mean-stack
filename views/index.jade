@@ -8,6 +8,7 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     base(href="/")
     // Css
+    link(rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css")
     link(rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css")
     link(rel="stylesheet" href="css/style.css")
     // Js
@@ -15,6 +16,8 @@ html(lang="en")
     script(src="libs/angular-route/angular-route.min.js")
     // Angular App
     script(src="js/controllers/MainCtrl.js")
+    script(src="js/controllers/LoginCtrl.js")
+    script(src="js/controllers/SignupCtrl.js")
     script(src="js/controllers/NerdCtrl.js")
     script(src="js/services/NerdService.js")
     script(src="js/appRoutes.js")
@@ -30,6 +33,14 @@ html(lang="en")
         // Navigation: handle routing
         ul.nav.navbar-nav
           li: a(href="/nerds") Nerds
+        ul.nav.navbar-nav
+          li: a(href="/login") 
+            span.fa.fa-user
+            |  Login
+        ul.nav.navbar-nav
+          li: a(href="/signup") 
+            span.fa.fa-user
+            |  Signup
             
       // Angular Dynamic Content
       div(ng-view)
