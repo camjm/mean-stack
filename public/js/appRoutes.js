@@ -20,6 +20,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     .when('/signup', {
       templateUrl: 'partials/signup',
       controller: 'SignupController'
+    })
+
+    .when('/profile', {
+      templateUrl: 'partials/profile',
+      controller: 'SignupController'
     });
 
   $locationProvider.html5Mode(true);

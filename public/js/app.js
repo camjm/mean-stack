@@ -4,6 +4,7 @@ angular.module('meanApp', [
   'MainCtrl',
   'LoginCtrl',
   'SignupCtrl',
+  'ProfileCtrl',
   'NerdCtrl',
   'NerdService'
 ]);
