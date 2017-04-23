@@ -34,9 +34,11 @@ module.exports = function(app, passport) {
   });
 
   // process the login form
-  app.post('/login', function(req, res) {
-    //TODO: passport stuff here
-  });
+  app.post('/login', passport.authenticate('local-login', {
+    successRedirect: '/profile',
+    failureRedirect: '/login', // if not specifed, responds with HTTP 401
+    failureFlash: true // allow flash messages
+  }));
 
   // passport strategy authenticates request, and handles success/failure
   app.post('/signup', passport.authenticate('local-signup', {
