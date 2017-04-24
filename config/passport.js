@@ -3,7 +3,11 @@ Holds the configuration for the passportjs strategies (local, facebook, twitter,
 */
 
 var User = require('../app/models/user');
+
+var configAuth = require('./authentication');
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 module.exports = function(passport) {
 
@@ -121,6 +125,58 @@ module.exports = function(passport) {
       });
 
     }));
+
+  /* GOOGLE LOGIN
+   * google login
+   */
+
+  passport.use(new GoogleStrategy(configAuth.googleAuth,
+    // handle the data that gets sent back from google
+    function(token, refreshToken, profile, done) {
+
+      // asynchronous: User.findOne won't fire until data comes back from Google
+      process.nextTick(function() {
+
+        // find the user based on their google id
+        User.findOne({
+          'google.id': profile.id
+        }, function(err, user) {
+
+          if (err) {
+            // database error: handled by Express, generates a HTTP 500 response
+            return done(err);
+          }
+
+          if (user) {
+            // if found, log the user in
+            return done(null, user);
+          } else {
+            // user isn't in database - create new user
+            var newUser = new User();
+
+            // update the new user's google information
+            newUser.google.id = profile.id;
+            newUser.google.token = token;
+            newUser.google.name = profile.displayName;
+            newUser.google.email = profile.emails[0].value;
+
+            // save the new user
+            newUser.save(function(err) {
+              return done(err, newUser);
+            });
+          }
+
+        });
+
+      });
+
+    }));
+
+  /* FACEBOOK LOGIN
+   * facebook login
+   */
+
+  passport.use();
 
 };
 

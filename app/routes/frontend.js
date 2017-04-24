@@ -40,6 +40,15 @@ module.exports = function(app, passport) {
     failureFlash: true // allow flash messages
   }));
 
+  // TODO: see http://passportjs.org/docs#authenticate
+  // If authentication succeeds, the next handler will be invoked and the req.user property will be set to the authenticated user.
+  // By default, if authentication fails, Passport will respond with a 401 Unauthorized status
+  // app.post('/login',
+  //   passport.authenticate('local-login'),
+  //   function(req, res) {
+  //     res.json(req.user);
+  //   });
+
   // passport strategy authenticates request, and handles success/failure
   app.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/profile',
@@ -47,7 +56,18 @@ module.exports = function(app, passport) {
     failureFlash: true // allow flash messages
   }));
 
-  // handle Angular SPA request (for all other routes)
+  // the scope specifies the permissions the users will be asked for
+  app.get('/auth/google', passport.authenticate('google', {
+    scope: ['profile', 'email']
+  }));
+
+  // handle the callback after google has authenticated the user
+  app.get('/auth/google/callback', passport.authenticate('google', {
+    successRedirect: '/profile',
+    failureRedirect: '/'
+  }));
+
+  // handle Angular SPA request (for all other routes) TODO: use '/' instead
   app.get('*', function(req, res) {
     res.render('index');
   });

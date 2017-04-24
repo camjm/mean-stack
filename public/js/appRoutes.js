@@ -17,6 +17,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
       controller: 'LoginController'
     })
 
+    .when('/auth/google', {
+      templateUrl: '/auth/google',
+      controller: 'LoginController'
+    })
+
     .when('/signup', {
       templateUrl: 'partials/signup',
       controller: 'SignupController'
