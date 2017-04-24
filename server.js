@@ -74,10 +74,15 @@ app.use(morgan('dev'));
 // ROUTES
 
 // configure routes
+require('./app/routes/frontend')(app);
+
 var apiRouter = express.Router();
-require('./app/routes/backend')(apiRouter, passport);
-require('./app/routes/frontend')(app, passport);
-app.use('/api', apiRouter); // mount api
+require('./app/routes/backend')(apiRouter);
+app.use('/api', apiRouter); // mount
+
+var authRouter = express.Router();
+require('./app/routes/authentication')(authRouter, passport);
+app.use('/auth', authRouter);
 
 // VIEWS
 app.set('views', path.join(__dirname, '/views'));
