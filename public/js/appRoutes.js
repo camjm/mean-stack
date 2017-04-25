@@ -1,4 +1,4 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider, USER_ROLES) {
 
   $routeProvider
 
@@ -17,10 +17,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
       controller: 'LoginController'
     })
 
-    .when('/auth/google', {
-      templateUrl: '/auth/google',
-      controller: 'LoginController'
-    })
+    // .when('/auth/google', {
+    //   templateUrl: '/auth/google',
+    //   controller: 'LoginController'
+    // })
 
     .when('/signup', {
       templateUrl: 'partials/signup',
@@ -29,7 +29,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 
     .when('/profile', {
       templateUrl: 'partials/profile',
-      controller: 'SignupController'
+      controller: 'ProfileController',
+      resolve: {
+        // for access control
+        roles: [USER_ROLES.admin, USER_ROLES.editor]
+      }
     });
 
   $locationProvider.html5Mode(true);

@@ -24,7 +24,7 @@ html(lang="en")
     script(src="js/appRoutes.js")
     script(src="js/app.js")
 
-  body(ng-app="meanApp")
+  body(ng-app="meanApp" ng-contoller="ApplicationController")
     div.container
 
       // Header
@@ -46,6 +46,16 @@ html(lang="en")
           li: a(href="/profile") 
             span.fa.fa-user
             |  Profile
+
+      // ng-if/ng-switch remove elements from DOM entirely, so any template logic 
+      // (scope bindings, event handlers) within the elements will not be 
+      // reevaluated each digest cycle and slow it down
+      div(ng-if="currentUser")Welcome, {{ currentUser.name }}
+        div(ng-if="isAuthorized(userRoles.admin)") Yay!
+        div(ng-switch on="currentUser.role")
+          div(ng-switch-when="userRoles.admin") admin
+          div(ng-switch-when="userRoles.editor") editor
+          div(ng-switch-default) other
 
       // Angular Dynamic Content
       div(ng-view)

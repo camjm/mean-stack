@@ -8,14 +8,14 @@ div.col-sm-6.col-sm-offset-3
   if message.length > 0
     div.alert.alert-danger #{message}
   
-  // login form (TODO: submit in angular controller - see NerdController)
-  form(action="/login" method="post")
+  // login form (TODO: remove 'action' and 'method' attributes?)
+  form(action="/login" method="post" ng-submit="login(formData)" novalidate)
     div.form-group
-      label Email
-      input(type="text" name="email").form-control
+      label(for="email") Email
+      input(type="text" name="email" placeholder="email" ng-model="formData.email").form-control
     div.form-group
-      label Password
-      input(type="password" name="password").form-control
+      label(for="password") Password
+      input(type="password" name="password" placeholder="password" ng-model="formData.password").form-control
     button(type="submit").btn.btn-warning.btn-lg Login
 
   hr
