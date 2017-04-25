@@ -57,7 +57,5 @@ angular.module('meanApp').constant('AUTH_EVENTS', {
 });
 
 angular.module('meanApp').config(['$httpProvider', function($httpProvider) {
-  $httpProvider.interceptors.push(['$injector', function($injector) {
-    return $injector.get('AuthInterceptor');
-  }]);
+  $httpProvider.interceptors.push('AuthInterceptor');
 }]);
