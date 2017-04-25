@@ -38,7 +38,7 @@ module.exports = function(app) {
       return next();
     }
     // otherwise, redirect user toe the home page
-    res.redirect('/');
+    res.redirect(401, '/login');
   };
 
 };

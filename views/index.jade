@@ -23,10 +23,10 @@ html(lang="en")
     script(src="js/services/NerdService.js")
     script(src="js/appRoutes.js")
     script(src="js/app.js")
-    
+
   body(ng-app="meanApp")
     div.container
-    
+
       // Header
       nav.navbar.navbar-inverse
         div.navbar-header
@@ -42,6 +42,10 @@ html(lang="en")
           li: a(href="/signup") 
             span.fa.fa-user
             |  Signup
-            
+        ul.nav.navbar-nav
+          li: a(href="/profile") 
+            span.fa.fa-user
+            |  Profile
+
       // Angular Dynamic Content
       div(ng-view)
