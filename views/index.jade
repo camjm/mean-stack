@@ -16,11 +16,16 @@ html(lang="en")
     script(src="libs/angular-route/angular-route.min.js")
     // Angular App
     script(src="js/controllers/MainCtrl.js")
+    script(src="js/controllers/NerdCtrl.js")
     script(src="js/controllers/LoginCtrl.js")
     script(src="js/controllers/SignupCtrl.js")
     script(src="js/controllers/ProfileCtrl.js")
-    script(src="js/controllers/NerdCtrl.js")
+    script(src="js/controllers/ApplicationCtrl.js")
     script(src="js/services/NerdService.js")
+    script(src="js/services/AuthService.js")
+    script(src="js/services/SessionService.js")
+    script(src="js/services/AuthInterceptor.js")
+    script(src="js/services/LoginDialog.js")
     script(src="js/appRoutes.js")
     script(src="js/app.js")
 
@@ -59,3 +64,6 @@ html(lang="en")
 
       // Angular Dynamic Content
       div(ng-view)
+
+    // self-opening login dialog (don't want it to open when user is already on login page)
+    div(login-dialog ng-if="!isLoginPage")

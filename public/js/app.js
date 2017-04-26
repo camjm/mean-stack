@@ -11,7 +11,10 @@ angular.module('meanApp', [
   // services
   'NerdService',
   'AuthService',
-  'SessionService'
+  'SessionService',
+  // other
+  'AuthInterceptor',
+  'LoginDialog'
 ]);
 
 angular.module('meanApp').run(['$rootScope', 'AUTH_EVENTS', 'AuthService', function($rootScope, AUTH_EVENTS, AuthService) {
@@ -56,6 +59,11 @@ angular.module('meanApp').constant('AUTH_EVENTS', {
   guest: 'guest'
 });
 
+
+// https://docs.angularjs.org/api/ng/service/$http#interceptors
+// The official Angular docs recommed using interceptors for authentication for SPAs
+// Can use interceptors to process requests before being send to the server, or responses
+// before they are handed to the app code that initiated the request
 angular.module('meanApp').config(['$httpProvider', function($httpProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
 }]);

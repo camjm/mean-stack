@@ -18,4 +18,8 @@ angular.module('ApplicationCtrl', []).controller('ApplicationController', functi
     $scope.currentUser = user;
   };
 
+  $scope.isLoginPage = function() {
+    return false; //TODO
+  };
+
 });
