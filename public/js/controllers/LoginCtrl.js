@@ -1,4 +1,4 @@
-angular.module('LoginCtrl', []).controller('LoginController', function($scope, $rootScope, AuthService, AUTH_EVENTS) {
+angular.module('meanApp').controller('LoginController', function($scope, $rootScope, AuthService, AUTH_EVENTS) {
 
   $scope.formData = {};
 

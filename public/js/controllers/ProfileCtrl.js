@@ -1,4 +1,4 @@
-angular.module('ProfileCtrl', []).controller('ProfileController', function($scope) {
+angular.module('meanApp').controller('ProfileController', function($scope) {
 
   //TODO:
 

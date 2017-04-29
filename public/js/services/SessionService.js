@@ -1,6 +1,6 @@
 // Singleton service to encapsulate the user's session information
 
-angular.module('SessionService').session('Session', function() {
+angular.module('meanApp').service('Session', function() {
 
   this.create = function(sessionId, userId, userRole) {
     //TODO: change signature/properties to match backend data

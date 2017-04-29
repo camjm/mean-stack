@@ -1,6 +1,6 @@
 // Contains all logic related to Access Control (authentication and authorization)
 
-angular.module('AuthService', []).factory('AuthService', ['$http', 'Session', function($http, Session) {
+angular.module('meanApp').factory('AuthService', ['$http', 'Session', function($http, Session) {
 
   return {
 

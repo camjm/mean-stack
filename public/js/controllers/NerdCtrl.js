@@ -1,4 +1,4 @@
-angular.module('NerdCtrl', []).controller('NerdController', function($scope, Nerd) {
+angular.module('meanApp').controller('NerdController', function($scope, Nerd) {
 
     $scope.tagline = 'Nothing beats a pocket protector!';
 

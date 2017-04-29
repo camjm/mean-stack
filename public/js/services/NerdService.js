@@ -1,9 +1,9 @@
 // Contains calls to the Node API backend (using $http or $resource)
 
-angular.module('NerdService', []).factory('Nerd', ['$http', function($http) {
+angular.module('meanApp').factory('Nerd', ['$http', function($http) {
 
   return {
-    
+
     // call to GET all nerds
     get: function() {
       return $http.get('/api/nerds');

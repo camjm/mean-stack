@@ -1,6 +1,7 @@
 // Interceptor to broadcast user session events
+// Authentication effects the state of the whole application, so use events to broadcast changes in the user session
 
-angular.module('AuthInterceptor', []).factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', function($rootScope, $q, AUTH_EVENTS) {
+angular.module('meanApp').factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', function($rootScope, $q, AUTH_EVENTS) {
 
   return {
 

@@ -21,11 +21,11 @@ html(lang="en")
     script(src="js/controllers/SignupCtrl.js")
     script(src="js/controllers/ProfileCtrl.js")
     script(src="js/controllers/ApplicationCtrl.js")
+    script(src="js/interceptors/AuthInterceptor.js")
+    script(src="js/services/SessionService.js")
     script(src="js/services/NerdService.js")
     script(src="js/services/AuthService.js")
-    script(src="js/services/SessionService.js")
-    script(src="js/services/AuthInterceptor.js")
-    script(src="js/services/LoginDialog.js")
+    script(src="js/directives/LoginDialog.js")
     script(src="js/appRoutes.js")
     script(src="js/app.js")
 
@@ -40,20 +40,20 @@ html(lang="en")
         ul.nav.navbar-nav
           li: a(href="/nerds") Nerds
         ul.nav.navbar-nav
-          li: a(href="/login") 
+          li: a(href="/login")
             span.fa.fa-user
             |  Login
         ul.nav.navbar-nav
-          li: a(href="/signup") 
+          li: a(href="/signup")
             span.fa.fa-user
             |  Signup
         ul.nav.navbar-nav
-          li: a(href="/profile") 
+          li: a(href="/profile")
             span.fa.fa-user
             |  Profile
 
-      // ng-if/ng-switch remove elements from DOM entirely, so any template logic 
-      // (scope bindings, event handlers) within the elements will not be 
+      // ng-if/ng-switch remove elements from DOM entirely, so any template logic
+      // (scope bindings, event handlers) within the elements will not be
       // reevaluated each digest cycle and slow it down
       div(ng-if="currentUser")Welcome, {{ currentUser.name }}
         div(ng-if="isAuthorized(userRoles.admin)") Yay!

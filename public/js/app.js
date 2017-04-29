@@ -1,21 +1,31 @@
 angular.module('meanApp', [
   'ngRoute',
-  'appRoutes',
-  // controllers
-  'MainCtrl',
-  'NerdCtrl',
-  'LoginCtrl',
-  'SignupCtrl',
-  'ProfileCtrl',
-  'ApplicationCtrl',
-  // services
-  'NerdService',
-  'AuthService',
-  'SessionService',
-  // other
-  'AuthInterceptor',
-  'LoginDialog'
+  'appRoutes'
 ]);
+
+// Event Codes
+angular.module('meanApp').constant('AUTH_EVENTS', {
+  loginSuccess: 'auth-login-success',
+  loginFailure: 'auth-login-failure',
+  logoutSuccess: 'auth-logout-success',
+  sessionTimeout: 'auth-session-timeout',
+  notAuthenticated: 'auth-not-authenticated',
+  notAuthorized: 'auth-not-authorized' // TODO: show error message when triggered?
+})
+
+// User Roles
+angular.module('meanApp').constant('USER_ROLES', {
+  all: '*',
+  admin: 'admin',
+  editor: 'editor',
+  guest: 'guest'
+});
+
+angular.module('meanApp').config(['$httpProvider', function($httpProvider) {
+  // The official Angular docs recommed using interceptors for authentication in SPAs
+  // Can use them to process responses before they are handed to the app code that initiated the request
+  $httpProvider.interceptors.push('AuthInterceptor');
+}]);
 
 angular.module('meanApp').run(['$rootScope', 'AUTH_EVENTS', 'AuthService', function($rootScope, AUTH_EVENTS, AuthService) {
 
@@ -41,29 +51,4 @@ angular.module('meanApp').run(['$rootScope', 'AUTH_EVENTS', 'AuthService', funct
     console.log('route change error!');
   });
 
-}]);
-
-// EVENT CODES
-// Authentication effects the state of the whole application, so use events to broadcast changes in the user session
-angular.module('meanApp').constant('AUTH_EVENTS', {
-  loginSuccess: 'auth-login-success',
-  loginFailure: 'auth-login-failure',
-  logoutSuccess: 'auth-logout-success',
-  sessionTimeout: 'auth-session-timeout',
-  notAuthenticated: 'auth-not-authenticated', // TODO: open loginDialog directive when triggered? (inject scope into directive then '$on' it)
-  notAuthorized: 'auth-not-authorized' // TODO: show error message when triggered?
-}).constant('USER_ROLES', {
-  all: '*',
-  admin: 'admin',
-  editor: 'editor',
-  guest: 'guest'
-});
-
-
-// https://docs.angularjs.org/api/ng/service/$http#interceptors
-// The official Angular docs recommed using interceptors for authentication for SPAs
-// Can use interceptors to process requests before being send to the server, or responses
-// before they are handed to the app code that initiated the request
-angular.module('meanApp').config(['$httpProvider', function($httpProvider) {
-  $httpProvider.interceptors.push('AuthInterceptor');
 }]);

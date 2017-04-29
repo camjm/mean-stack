@@ -1,4 +1,4 @@
-angular.module('SignupCtrl', []).controller('SignupController', function($scope) {
+angular.module('meanApp').controller('SignupController', function($scope) {
 
   //TODO:
 

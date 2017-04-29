@@ -5,7 +5,7 @@
  * Use this instead of $rootScope, which is only used for global eventing.
  */
 
-angular.module('ApplicationCtrl', []).controller('ApplicationController', function($scope, USER_ROLES, AuthService) {
+angular.module('meanApp').controller('ApplicationController', function($scope, USER_ROLES, AuthService) {
 
   // don't use these properties in controllers that inherit from this scope - reduces testability
   $scope.userRoles = USER_ROLES;
