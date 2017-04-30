@@ -27,7 +27,7 @@ module.exports = function(app) {
   });
 
   // handle Angular SPA request (for all other routes) TODO: use '/' instead
-  app.get('*', function(req, res) {
+  app.get('/', function(req, res) {
     res.render('index');
   });
 

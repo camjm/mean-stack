@@ -2,6 +2,8 @@
   "name": "mean-stack",
   "version": "0.0.0",
   "description": "A template solution for a Node/Angular SPA",
+  "author": "camjm",
+  "license": "ISC",
   "main": "server.js",
   "scripts": {
     "prestart": " start mongod.exe",
@@ -19,8 +21,6 @@
     "Express",
     "webapp"
   ],
-  "author": "camjm",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/camjm/mean-stack/issues"
   },

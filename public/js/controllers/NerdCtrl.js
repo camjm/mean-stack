@@ -9,7 +9,6 @@ angular.module('meanApp').controller('NerdController', function($scope, Nerd) {
       .then(function(response) {
         // on success
         $scope.nerds = response.data;
-        console.log(response);
       }, function(response) {
         // handle errors produced by $http
         console.log('Error: ' + response)
@@ -26,7 +25,6 @@ angular.module('meanApp').controller('NerdController', function($scope, Nerd) {
           // on success
           $scope.formData = {}; // clear the form
           $scope.nerds = response.data;
-          console.log(response);
         }, function(response) {
           // handle errors produced by $http
           console.log('Error: ' + response);
@@ -43,7 +41,6 @@ angular.module('meanApp').controller('NerdController', function($scope, Nerd) {
         .then(function(response){
           // on success
           $scope.nerds = response.data;
-          console.log(response);
         }, function(response) {
           // handle errors produced by $http
           console.log('Error: ' + response)

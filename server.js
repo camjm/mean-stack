@@ -36,7 +36,11 @@ db.once('open', function() {
 require('./config/passport')(passport);
 
 // session secret
-app.use(session({ secret: 'thisisreallythesecret' }));
+app.use(session({
+  secret: 'thisisreallythesecret',
+  saveUnitialized: true,
+  resave: false
+}));
 
 // persistent login sessions
 app.use(passport.initialize());

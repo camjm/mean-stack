@@ -12,6 +12,24 @@ module.exports = function(app) {
     next(); // don't stop here, continue down pipeline
   });
 
+  app.use(function(req, res, next) {
+    // the express-session package maintains the session object on the request
+    var session = req.session;
+    if (!session.views) {
+      session.views = {};
+    }
+
+    var views = session.views;
+    var pathname =  req.path;
+
+    if (!angular.isNumber(views[pathname])) {
+      views[pathname] = 0;
+    }
+
+    // count the views
+    ++views[pathname];
+  });
+
   // Get All
   app.get('/nerds', function(req, res) {
     // use mongoose to get all nerds from db
