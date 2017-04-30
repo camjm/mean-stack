@@ -5,5 +5,6 @@ create an account with a service like Modulus or MongoLab
 */
 
 module.exports = {
+  // 'test' is the database name
   url: 'mongodb://localhost:27017/test'
 }

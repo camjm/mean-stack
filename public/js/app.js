@@ -30,7 +30,7 @@ angular.module('meanApp').config(['$httpProvider', function($httpProvider) {
 angular.module('meanApp').run(['$rootScope', 'AUTH_EVENTS', 'AuthService', function($rootScope, AUTH_EVENTS, AuthService) {
 
   // disallow access to page if not authorized
-  $rooteScope.$on('$routeChangeStart', function (event, current, previous) {
+  $rooteScope.$on('$routeChangeStart', function (event, next, current) {
     var authorizedRoles = next.data.authorizedRoles;
     if (!AuthService.isAuthorized(authorizedRoles)) {
       // prevent transitiion to next page

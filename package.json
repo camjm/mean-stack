@@ -4,7 +4,7 @@
   "description": "A template solution for a Node/Angular SPA",
   "main": "server.js",
   "scripts": {
-    "prestart": " start C:\\\"Program Files\"\\MongoDB\\Server\\3.4\\bin\\mongod.exe",
+    "prestart": " start mongod.exe",
     "start": "node server.js"
   },
   "repository": {
