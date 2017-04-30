@@ -30,10 +30,8 @@ angular.module('meanApp').config(['$routeProvider', '$locationProvider', 'USER_R
     .when('/profile', {
       templateUrl: 'partials/profile',
       controller: 'ProfileController',
-      resolve: {
-        // for access control
-        roles: [USER_ROLES.admin, USER_ROLES.editor]
-      }
+      // for access control
+      roles: [USER_ROLES.admin, USER_ROLES.editor]
     });
 
   $locationProvider.html5Mode(true);

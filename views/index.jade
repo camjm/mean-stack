@@ -15,6 +15,8 @@ html(lang="en")
     script(src="libs/angular/angular.min.js")
     script(src="libs/angular-route/angular-route.min.js")
     // Angular App
+    script(src="js/app.js")
+    script(src="js/appRoutes.js")
     script(src="js/controllers/MainCtrl.js")
     script(src="js/controllers/NerdCtrl.js")
     script(src="js/controllers/LoginCtrl.js")
@@ -26,8 +28,6 @@ html(lang="en")
     script(src="js/services/NerdService.js")
     script(src="js/services/AuthService.js")
     script(src="js/directives/LoginDialog.js")
-    script(src="js/appRoutes.js")
-    script(src="js/app.js")
 
   body(ng-app="meanApp" ng-contoller="ApplicationController")
     div.container
@@ -55,7 +55,7 @@ html(lang="en")
       // ng-if/ng-switch remove elements from DOM entirely, so any template logic
       // (scope bindings, event handlers) within the elements will not be
       // reevaluated each digest cycle and slow it down
-      div(ng-if="currentUser")Welcome, {{ currentUser.name }}
+      div(ng-if="currentUser") Welcome, {{ currentUser.name }}
         div(ng-if="isAuthorized(userRoles.admin)") Yay!
         div(ng-switch on="currentUser.role")
           div(ng-switch-when="userRoles.admin") admin

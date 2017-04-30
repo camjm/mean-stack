@@ -1,6 +1,5 @@
 angular.module('meanApp', [
-  'ngRoute',
-  'appRoutes'
+  'ngRoute'
 ]);
 
 // Event Codes
@@ -30,8 +29,10 @@ angular.module('meanApp').config(['$httpProvider', function($httpProvider) {
 angular.module('meanApp').run(['$rootScope', 'AUTH_EVENTS', 'AuthService', function($rootScope, AUTH_EVENTS, AuthService) {
 
   // disallow access to page if not authorized
-  $rooteScope.$on('$routeChangeStart', function (event, next, current) {
-    var authorizedRoles = next.data.authorizedRoles;
+  $rootScope.$on('$routeChangeStart', function (event, next, current) {
+    var authorizedRoles = next.$$route.roles;
+    if (!angular.isDefined(authorizedRoles)) return;
+
     if (!AuthService.isAuthorized(authorizedRoles)) {
       // prevent transitiion to next page
       event.preventDefault();

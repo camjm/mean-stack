@@ -1,7 +1,7 @@
 // When the session expires, user needs to reenter credentials. Instead of redirecting,
 // show a popup dialog, that listens to the appropriate events and opens itself.
 
-angular.module('meanApp']).directive('loginDialog', ['AUTH_EVENTS', function(AUTH_EVENTS) {
+angular.module('meanApp').directive('loginDialog', ['AUTH_EVENTS', function(AUTH_EVENTS) {
 
   return {
     restrict: 'A',
