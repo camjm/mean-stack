@@ -13,7 +13,7 @@ module.exports = function(app) {
   });
 
   app.use(function(req, res, next) {
-    // the express-session package maintains the session object on the request
+    // the express-session middleware maintains the session object on the request
     var session = req.session;
     if (!session.views) {
       session.views = {};
