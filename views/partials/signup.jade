@@ -10,11 +10,11 @@ div.col-sm-6.col-sm-offset-3
 
   // Signup form (TODO: submit in angular controller - see NerdController)
   form(name="signupForm" action="/signup" method="post" ng-submit="signup(formData)" novalidate)
-    div.form-group
+    div(ng-class="{ 'has-error': showWarning(signupForm.email) }").form-group
       label(for="email") Email
       input(type="text" name="email" placeholder="email" ng-model="formData.email" required).form-control
       span(ng-show="showWarning(signupForm.email)").help-block Email is required
-    div.form-group
+    div(ng-class="{ 'has-error': showWarning(signupForm.password) }").form-group
       label(for="password") Password
       input(type="password" name="password" placeholder="password" ng-model="formData.password" required).form-control
       span(ng-show="showWarning(signupForm.password)").help-block Password is required
