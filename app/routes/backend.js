@@ -22,12 +22,15 @@ module.exports = function(app) {
     var views = session.views;
     var pathname =  req.path;
 
-    if (!angular.isNumber(views[pathname])) {
+    if (isNaN(views[pathname])) {
       views[pathname] = 0;
     }
 
     // count the views
     ++views[pathname];
+
+    // move on to next middleware
+    next();
   });
 
   // Get All

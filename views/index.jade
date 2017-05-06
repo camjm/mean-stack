@@ -29,7 +29,7 @@ html(lang="en")
     script(src="js/services/AuthService.js")
     script(src="js/directives/LoginDialog.js")
 
-  body(ng-app="meanApp" ng-contoller="ApplicationController")
+  body(ng-app="meanApp" ng-controller="ApplicationController")
     div.container
 
       // Header
@@ -67,3 +67,7 @@ html(lang="en")
 
     // self-opening login dialog (don't want it to open when user is already on login page)
     div(login-dialog ng-if="!isLoginPage")
+
+    div.navbar.navbar-fixed-bottom
+      div.credits.text-center
+        p.text-muted Mean Stack Applicaion

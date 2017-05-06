@@ -1,5 +1,9 @@
 angular.module('meanApp').controller('SignupController', function($scope) {
 
-  //TODO:
+  $scope.formData = {};
+
+  $scope.signup = function(credentials) {
+    //TODO:
+  };
 
 });
