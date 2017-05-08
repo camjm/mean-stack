@@ -9,7 +9,7 @@ div.col-sm-6.col-sm-offset-3
     div.alert.alert-danger #{message}
 
   // login form (TODO: remove 'action' and 'method' attributes?)
-  form(name="loginForm" action="/login" method="post" ng-submit="login(formData)" novalidate)
+  form(name="loginForm" ng-submit="login(formData)" novalidate)
     div(ng-class="{ 'has-error': showWarning(loginForm.email) }").form-group
       label(for="email") Email
       input(type="text" name="email" placeholder="email" ng-model="formData.email" required).form-control

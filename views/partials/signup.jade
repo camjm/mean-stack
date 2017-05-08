@@ -9,7 +9,7 @@ div.col-sm-6.col-sm-offset-3
     div.alert.alert-danger #{message}
 
   // Signup form (TODO: submit in angular controller - see NerdController)
-  form(name="signupForm" action="/signup" method="post" ng-submit="signup(formData)" novalidate)
+  form(name="signupForm" ng-submit="signup(formData)" novalidate)
     div(ng-class="{ 'has-error': showWarning(signupForm.email) }").form-group
       label(for="email") Email
       input(type="text" name="email" placeholder="email" ng-model="formData.email" required).form-control
