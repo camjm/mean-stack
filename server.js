@@ -3,7 +3,7 @@ Application Bootstrap
 */
 
 // MODULES
-var path = require('path')
+var path = require('path');
 var morgan = require('morgan');
 var express = require('express');
 var session = require('express-session');
