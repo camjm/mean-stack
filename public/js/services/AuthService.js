@@ -6,7 +6,7 @@ angular.module('meanApp').factory('AuthService', ['$http', 'Session', function($
 
     login: function(credentials) {
       return $http
-        .post('/login', credentials)
+        .post('/auth/login', credentials)
         .then(function(res) {
           Session.create(
             res.data.id,
