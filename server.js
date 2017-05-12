@@ -12,7 +12,6 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
-var flash = require('connect-flash');
 
 var app = express();
 
@@ -45,9 +44,6 @@ app.use(session({
 // persistent login sessions
 app.use(passport.initialize());
 app.use(passport.session());
-
-// flash messages stored in session
-app.use(flash());
 
 // MIDDLEWARE (run in order)
 

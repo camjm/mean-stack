@@ -36,7 +36,7 @@ module.exports = function(passport) {
       // override passport defaults because we're using 'email', not 'username'
       usernameField: 'email',
       passwordField: 'password',
-      passReqToCallback: true // required for flash data
+      passReqToCallback: true
     },
     // callback with email and password from the signup form
     function(req, email, password, done) {
@@ -52,10 +52,8 @@ module.exports = function(passport) {
           }
           // check if there is already a user with this email
           if (user) {
-            // connect-flash: message stored in session so it can be used in template
-            var info = req.flash('signupMessage', 'That email is already used.')
-            // authentication error: don't generate error, pass false to next()
-            // as user object - this will trigger passport's failureRedirect
+            // authentication failed: user already exists - return false
+            var info = {'signupMessage': 'That email is already used.'}
             return done(null, false, info);
           } else {
             // create the new user
@@ -65,7 +63,12 @@ module.exports = function(passport) {
             newUser.local.password = newUser.generateHash(password);
             // save the new user
             newUser.save(function(err) {
-              return done(err, newUser);
+              if (err) {
+                // database error: handled by Express, generates a HTTP 500 response
+                return done(err);
+              }
+              // Signup authentication successful: return new user
+              return done(null, newUser);
             });
           }
         });
@@ -81,7 +84,7 @@ module.exports = function(passport) {
       // override passport defaults because we're using 'email', not 'username'
       usernameField: 'email',
       passwordField: 'password',
-      passReqToCallback: true // required for flash data
+      passReqToCallback: true
     },
     // callback with email and password from the login form
     function(req, email, password, done) {
@@ -95,17 +98,17 @@ module.exports = function(passport) {
         }
         // check user exists
         if (!user) {
-          // save loginMessage to session as flash data
-          var info = req.flash('loginMessage', 'User not found.')
+          // authentication failed: user doesn't exist - return false
+          var info = {'message': 'User not found.'}
           return done(null, false, info);
         }
         // check password is valid
         if (!user.validPassword(password)) {
-          // save loginMessage to session as flash data
-          var info = req.flash('loginMessage', 'Oops! wrong password.')
+          // authentication failed: password not correct - return false
+          var info = {'loginMessage': 'Oops! wrong password.'};
           return done(null, false, info);
         }
-        // successful login
+        // login authentication successful: return user
         return done(null, user);
       });
     }));
