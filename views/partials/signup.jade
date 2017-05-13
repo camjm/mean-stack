@@ -5,11 +5,10 @@ div.col-sm-6.col-sm-offset-3
     |  Signup
 
   // show any messages that come back with the authentication
-  if message.length > 0
-    div.alert.alert-danger #{message}
+  div(ng-show="message").alert.alert-danger {{ message }}
 
   // Signup form (TODO: submit in angular controller - see NerdController)
-  form(name="signupForm" ng-submit="signup(formData)" novalidate)
+  form(name="signupForm" ng-submit="signup(formData, signupForm)" novalidate)
     div(ng-class="{ 'has-error': showWarning(signupForm.email) }").form-group
       label(for="email") Email
       input(type="text" name="email" placeholder="email" ng-model="formData.email" required).form-control

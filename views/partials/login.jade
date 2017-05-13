@@ -5,11 +5,10 @@ div.col-sm-6.col-sm-offset-3
     |  Login
 
   // show any messages that come back with the authentication
-  if message.length > 0
-    div.alert.alert-danger #{message}
+  div(ng-show="message").alert.alert-danger {{ message }}
 
   // login form (TODO: remove 'action' and 'method' attributes?)
-  form(name="loginForm" ng-submit="login(formData)" novalidate)
+  form(name="loginForm" ng-submit="login(formData, loginForm)" novalidate)
     div(ng-class="{ 'has-error': showWarning(loginForm.email) }").form-group
       label(for="email") Email
       input(type="text" name="email" placeholder="email" ng-model="formData.email" required).form-control

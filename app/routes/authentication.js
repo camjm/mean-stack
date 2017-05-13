@@ -10,13 +10,17 @@ module.exports = function(app, passport) {
         return next(err); // generate HTTP 500 error
       }
       if (!user) {
-        return res.json(info);
+        return res.status(401).json(info);
       }
       req.login(user, function(err) {
         if (err) {
           return next(err);
         }
-        res.json(user);
+        var data = {
+          id: req.sessionID,
+          user: user
+        };
+        res.json(data);
       });
     })(req, res, next);
   });
@@ -31,13 +35,17 @@ module.exports = function(app, passport) {
         return next(err);
       }
       if (!user) {
-        return res.json(info);
+        return res.status(401).json(info);
       }
       req.login(user, function(err) {
         if (err) {
           return next(err);
         }
-        res.json(user);
+        var data = {
+          id: req.sessionID,
+          user: user
+        };
+        res.json(data);
       });
     })(req, res, next);
   });

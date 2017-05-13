@@ -34,7 +34,8 @@ db.once('open', function() {
 
 require('./config/passport')(passport);
 
-// session secret
+// express-session is responsible for setting cookies to browsers
+// and converting cookies sent by browsers into req.session
 app.use(session({
   secret: 'thisisreallythesecret',
   saveUnitialized: true,
@@ -42,6 +43,7 @@ app.use(session({
 }));
 
 // persistent login sessions
+// passport uses session to further serialize/deserialize the user
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -79,7 +81,7 @@ app.use('/api', apiRouter); // mount
 
 var authRouter = express.Router();
 require('./app/routes/authentication')(authRouter, passport);
-app.use('/auth', authRouter);
+app.use('/auth', authRouter); // mount
 
 require('./app/routes/frontend')(app);
 

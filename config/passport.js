@@ -11,16 +11,17 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 module.exports = function(passport) {
 
   /* PASSPORT SESSION SETUP
+   * Passport piggybacks off the Express session to store data for authenticated users
    * for persistent login sessions, passport needs to serialize and unserialize
    * users out of session
    */
 
-  // how to serialize the user for the session
+  // how to serialize the user for the cookie
   passport.serializeUser(function(user, done) {
     done(null, user.id);
   });
 
-  // how to deserialize the user from the session
+  // how to deserialize the user, to set to req.user, from the cookie
   passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
       done(err, user);
@@ -99,7 +100,7 @@ module.exports = function(passport) {
         // check user exists
         if (!user) {
           // authentication failed: user doesn't exist - return false
-          var info = {'message': 'User not found.'}
+          var info = {'loginMessage': 'User not found.'};
           return done(null, false, info);
         }
         // check password is valid

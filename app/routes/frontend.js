@@ -2,16 +2,12 @@ module.exports = function(app) {
 
   app.get('/partials/login', function(req, res) {
     // render page and pass any flash data in the session
-    res.render('./partials/login', {
-      message: req.flash('loginMessage')
-    });
+    res.render('./partials/login');
   });
 
   app.get('/partials/signup', function(req, res) {
     // render page and pass any flash data in the session
-    res.render('./partials/signup', {
-      message: req.flash('signupMessage')
-    });
+    res.render('./partials/signup');
   });
 
   // protected route: isLoggedIn
@@ -37,8 +33,8 @@ module.exports = function(app) {
     if (req.isAuthenticated()) {
       return next();
     }
-    // otherwise, redirect user toe the home page
-    res.redirect(401, '/login');
+    //otherwise, return error status code
+    res.status(401).json({'message': 'Not logged in.'});
   };
 
 };
