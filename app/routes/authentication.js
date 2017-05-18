@@ -5,24 +5,24 @@ module.exports = function(app, passport) {
    * responsibility to establish a session by callking req.login() and send a response
    */
   app.post('/login', function(req, res, next) {
-    passport.authenticate('local-login', function(err, user, info) {
-      if (err) {
-        return next(err); // generate HTTP 500 error
-      }
-      if (!user) {
-        return res.status(401).json(info);
-      }
-      req.login(user, function(err) {
+      passport.authenticate('local-login', function(err, user, info) {
         if (err) {
-          return next(err);
+          return next(err); // generate HTTP 500 error
         }
-        var data = {
-          id: req.sessionID,
-          user: user
-        };
-        res.json(data);
-      });
-    })(req, res, next);
+        if (!user) {
+          return res.status(401).json(info);
+        }
+        req.login(user, function(err) {
+          if (err) {
+            return next(err);
+          }
+          var data = {
+            id: req.sessionID,
+            user: user
+          };
+          res.json(data);
+        });
+      })(req, res, next);
   });
 
   /*

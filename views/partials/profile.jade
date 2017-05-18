@@ -1,10 +1,15 @@
 div.page-header.text-center
   h1
-    span.fa.fa-anchor 
+    span.fa.fa-anchor
     |  Profile Page
   a(href="/logout").btn.btn-default.btn-sm Logout
 
 div.row
+
+  div(ng-switch on="currentUser.role")
+    div(ng-switch-when="userRoles.admin") admin
+    div(ng-switch-when="userRoles.editor") editor
+    div(ng-switch-default) other
 
   // Local
   div.col-sm-6
