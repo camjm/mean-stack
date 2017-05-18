@@ -22,12 +22,4 @@ angular.module('meanApp').controller('ApplicationController', function($scope, U
     return false; //TODO
   };
 
-  $scope.showWarning = function(formController) {
-    return formController.$dirty && formController.$error.required;
-  };
-
-  $scope.disableSubmit = function(formController) {
-    return formController.$invalid;
-  };
-
 });

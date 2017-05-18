@@ -8,20 +8,23 @@ div.col-sm-6.col-sm-offset-3
   div(ng-show="message").alert.alert-danger {{ message }}
 
   form(name="loginForm" ng-submit="login(formData, loginForm)" novalidate)
-    div(ng-class="{ 'has-error': showWarning(loginForm.email) }").form-group
+    div(ng-class="{ 'has-error': loginForm.email.$touched && loginForm.email.$invalid }").form-group
       div.input-group
         span.input-group-addon
           i.fa.fa-envelope-o.fa-fw
-        input(type="text" name="email" placeholder="email" ng-model="formData.email" required).form-control
-      span(ng-show="showWarning(loginForm.email)").help-block Email is required
-    div(ng-class="{ 'has-error': showWarning(loginForm.password) }").form-group
+        input(type="email" name="email" placeholder="email" ng-model="formData.email" ng-model-options="{ updateOn: 'default blur', debounce: { default: 300, blur: 0 }  }" required).form-control
+      div(ng-show="loginForm.email.$touched || loginForm.email.$submitted")
+        span(ng-show="loginForm.email.$error.required").help-block Email is required
+        span(ng-show="loginForm.email.$error.email").help-block Invalid email
+    div(ng-class="{ 'has-error': loginForm.password.$touched && loginForm.password.$invalid }").form-group
       div.input-group
         span.input-group-addon
           i.fa.fa-key.fa-fw
-        input(type="password" name="password" placeholder="password" ng-model="formData.password" required).form-control
-      span(ng-show="showWarning(loginForm.password)").help-block Password is required
-    button(type="submit" ng-disabled="disableSubmit(loginForm)").btn.btn-warning Login
-
+        input(type="password" name="password" placeholder="password" ng-model="formData.password" ng-model-options="{ updateOn: 'default blur', debounce: { default: 300, blur: 0 }  }" ng-minlength="8" required).form-control
+      div(ng-show="loginForm.password.$touched || loginForm.password.$submitted")
+        span(ng-show="loginForm.password.$error.required").help-block Password is required
+        span(ng-show="loginForm.password.$error.minlength").help-block Password is too short
+    button(type="submit" ng-disabled="loginForm.$invalid").btn.btn-warning Login
   hr
 
   p

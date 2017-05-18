@@ -3,21 +3,27 @@ angular.module('meanApp').controller('LoginController',['$scope', '$rootScope', 
   $scope.formData = {};
   $scope.message = null;
 
+  $scope.resetForm = function(form) {
+    if (form) {
+      form.$setPristine();
+      form.$setUntouched();
+    }
+    $scope.formData = {};
+  };
+
   // submit the form (all authentication logic in the service)
   $scope.login = function(credentials, form) {
 
     AuthService.login(credentials).then(function(user) {
       // login successful
-      form.$setPristine();
-      $scope.formData = {};
+      $scope.resetForm(form);
       $scope.message = null;
       $scope.setCurrentUser(user);
       // notify the entire app with broadcast
       $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
     }, function(message) {
       // login failed
-      form.$setPristine();
-      $scope.formData = {};
+      $scope.resetForm(form);
       $scope.message = message;
       // notify the entire app with broadcast
       $rootScope.$broadcast(AUTH_EVENTS.loginFailure);
