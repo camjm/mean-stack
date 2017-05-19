@@ -1,23 +1,52 @@
 div.col-sm-6.col-sm-offset-3
 
-  h1
-    span.fa.fa-sign-in
-    |  Signup
+
 
   // show any messages that come back with the authentication
   div(ng-show="message").alert.alert-danger {{ message }}
 
-  // Signup form (TODO: submit in angular controller - see NerdController)
-  form(name="signupForm" ng-submit="signup(formData, signupForm)" novalidate)
-    div(ng-class="{ 'has-error': showWarning(signupForm.email) }").form-group
-      label(for="email") Email
-      input(type="text" name="email" placeholder="email" ng-model="formData.email" required).form-control
-      span(ng-show="showWarning(signupForm.email)").help-block Email is required
-    div(ng-class="{ 'has-error': showWarning(signupForm.password) }").form-group
-      label(for="password") Password
-      input(type="password" name="password" placeholder="password" ng-model="formData.password" required).form-control
-      span(ng-show="showWarning(signupForm.password)").help-block Password is required
-    button(type="submit" ng-disabled="disableSubmit(signupForm)").btn.btn-warning Signup
+  form(name="signupForm" ng-submit="signup(formData, signupForm)" novalidate).panel.panel-primary
+    div.panel-heading
+      h3.panel-title
+        span.fa.fa-sign-in
+        |  Signup
+
+    div.panel-body
+      // Username`
+      div(ng-class="{ 'has-success': (signupForm.username.$touched || signupForm.username.$dirty || signupForm.$submitted) && signupForm.username.$valid, 'has-error': (signupForm.username.$touched || signupForm.username.$dirty || signupForm.$submitted) && signupForm.username.$invalid }").form-group
+        label(for="username") Username
+        input(type="text" name="username" placeholder="username" ng-model="formData.username" username required).form-control
+        div(ng-show="(signupForm.username.$touched || signupForm.username.$dirty) || signupForm.$submitted")
+          span(ng-show="signupForm.username.$error.required").help-block Username is required
+          span(ng-show="signupForm.username.$error.username").help-block This username is already taken!
+          span(ng-show="signupForm.username.$pending.username").help-block Checking if this name is available...
+          span(ng-show="signupForm.username.$valid").help-block Congratulations! This username is available
+
+      // Email Address
+      div(ng-class="{ 'has-error': (signupForm.email.$touched || signupForm.$submitted) && signupForm.email.$invalid }").form-group
+        label(for="email") Email
+        input(type="email" name="email" placeholder="email" ng-model="formData.email" ng-model-options="{ updateOn: 'default blur', debounce: { default: 300, blur: 0 }  }" required).form-control
+        div(ng-show="signupForm.email.$touched || signupForm.$submitted")
+          span(ng-show="signupForm.email.$error.required").help-block Email is required
+          span(ng-show="signupForm.email.$error.email").help-block Invalid email
+
+      // Password
+      div(ng-class="{ 'has-error': (signupForm.password.$touched || signupForm.$submitted) && signupForm.password.$invalid }").form-group
+        label(for="password") Password
+        input(type="password" name="password" placeholder="password" ng-model="formData.password" ng-model-options="{ updateOn: 'default blur', debounce: { default: 300, blur: 0 }  }" ng-minlength="8" required).form-control
+        span(ng-show="showWarning(signupForm.password)").help-block Password is required
+        div(ng-show="signupForm.password.$touched || signupForm.$submitted")
+          span(ng-show="signupForm.password.$error.required").help-block Password is required
+          span(ng-show="signupForm.password.$error.minlength").help-block Password is too short
+
+      // Confirm Password
+      div(ng-class="{ 'has-error': showWarning(signupForm.confirmPassword) }").form-group
+        label(for="confirmPassword") Confirm Password
+        input(type="password" name="confirmPassword" placeholder="confirm password" ng-model="formData.confirmPassword" required).form-control
+        span(ng-show="showWarning(signupForm.confirmPassword)").help-block Confirm password is required
+
+    div.panel-footer
+        button(type="submit").btn.btn-primary Signup
 
   hr
 
